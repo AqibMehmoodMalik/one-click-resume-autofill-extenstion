@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One-Click Job Autofill — Private Demo</title>
+  <style>
+    :root{font:15px/1.45 "Segoe UI",system-ui,sans-serif;color:#17243a;background:#f3f6fb}
+    *{box-sizing:border-box}
+    body{margin:0}
+    header{height:62px;background:#fff;border-bottom:1px solid #e5eaf2;display:flex;align-items:center;justify-content:space-between;padding:0 max(calc((100vw - 1120px)/2),36px)}
+    .brand{font-weight:750;letter-spacing:.02em;color:#17243a}.brand b{color:#4263eb}
+    .secure{font-size:12px;color:#476178;background:#f0f6f7;padding:7px 12px;border-radius:20px}
+    main{max-width:1120px;margin:26px auto;padding:0 4px}
+    .crumb{font-size:12px;color:#77849a;margin-bottom:14px}
+    .titlebar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    h1{font-size:26px;line-height:1.2;margin:0 0 6px;letter-spacing:-.03em}
+    .sub{color:#65748b;font-size:13px}
+    .privacy-note{font-size:11px;color:#5c6f87;margin-top:5px}
+    .demo-button{border:0;border-radius:9px;background:#3457d5;color:white;padding:11px 17px;font-weight:650;font-size:14px;box-shadow:0 5px 12px #3457d533;cursor:pointer}
+    .demo-button:hover{background:#2948bd}
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:18px;align-items:start}
+    .card,.aside-card{background:white;border:1px solid #e2e8f0;border-radius:13px;box-shadow:0 7px 24px #2538580b}
+    .card{padding:23px 25px}
+    .section-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #edf0f5;padding-bottom:14px;margin-bottom:18px}
+    h2{font-size:16px;margin:0;font-weight:700}
+    .step{font-size:11px;color:#738198}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:13px 16px}
+    .field{min-width:0}.field.full{grid-column:1/-1}
+    label,.legend{display:block;font-size:12px;font-weight:650;color:#41506a;margin-bottom:6px}
+    input:not([type=checkbox]):not([type=file]),select,textarea{width:100%;border:1px solid #dce3ed;border-radius:7px;background:#fff;padding:10px 11px;font:13px "Segoe UI",system-ui;color:#1a2a42;outline:none}
+    input:focus,select:focus,textarea:focus{border-color:#7790f4;box-shadow:0 0 0 3px #3457d51a}
+    textarea{resize:none;min-height:82px}
+    .upload{border:1px dashed #bdc8d8;border-radius:8px;padding:11px;background:#fbfcfe}
+    input[type=file]{font-size:12px;max-width:100%}
+    fieldset{border:0;padding:0;margin:0}.choices{display:flex;gap:12px}
+    .choices label,.consent{font-weight:450;display:flex;align-items:center;gap:6px;margin:3px 0;color:#53627a}
+    .consent{margin-top:19px;padding-top:14px;border-top:1px solid #edf0f5;font-size:12px}
+    .aside-card{padding:18px;margin-bottom:13px}
+    .aside-card h3{font-size:13px;margin:0 0 12px}
+    .status{font-size:12px;color:#687890;min-height:36px}
+    .status strong{color:#16805a}
+    .local-row{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:#53627a;padding:10px 0;border-top:1px solid #eef1f5}
+    .dot{width:8px;height:8px;border-radius:100%;background:#25a779;flex:none;margin-top:4px}
+    .tag{display:inline-flex;background:#eef2ff;color:#405bd1;border-radius:5px;padding:3px 7px;font-size:11px;margin:3px 3px 0 0}
+    .memory{max-width:1120px;margin:18px auto 100px;padding:0 4px}
+    .memory .card{padding:20px 25px}
+    .memory-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+    .memory-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    #caption{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);width:max-content;max-width:85vw;background:#111c2eea;color:#fff;text-align:center;border-radius:10px;padding:12px 20px;font-size:18px;font-weight:550;box-shadow:0 8px 30px #0003;opacity:0;transition:opacity .25s;pointer-events:none}
+    #caption.show{opacity:1}
+    @media(max-width:850px){main,.memory{margin-left:20px;margin-right:20px}.layout{grid-template-columns:1fr 240px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">northstar <b>careers</b></div>
+    <div class="secure">◉ &nbsp;Public demo · phone hidden</div>
+  </header>
+  <main>
+    <div class="crumb">Careers &nbsp; / &nbsp; Engineering &nbsp; / &nbsp; Application</div>
+    <div class="titlebar">
+      <div><h1>Senior Machine Learning Engineer</h1><div class="sub">Northstar Analytics &nbsp;·&nbsp; Remote &nbsp;·&nbsp; Full-time</div></div>
+      <button id="autofill" class="demo-button">✦ &nbsp; Fill with One-Click</button>
+    </div>
+    <div class="layout">
+      <section class="card">
+        <div class="section-head"><h2>Application details</h2><span class="step">STEP 1 OF 2</span></div>
+        <div class="grid">
+          <div class="field"><label for="fn">First name</label><input id="fn" name="first_name" autocomplete="given-name"></div>
+          <div class="field"><label for="ln">Last name</label><input id="ln" name="last_name" autocomplete="family-name"></div>
+          <div class="field full"><label for="email">Email address</label><input id="email" name="email" type="email"></div>
+          <div class="field"><label for="country">Country</label><select id="country" name="country"><option value="">Choose country</option><option>Pakistan</option><option>Canada</option><option>United States</option></select></div>
+          <div class="field"><label for="citizen">Are you a citizen of the United States?</label><select id="citizen"><option value="">Choose an answer</option><option>Yes</option><option>No</option></select></div>
+          <div class="field full"><label for="experience">Describe your experience building multi-agent AI systems</label><textarea id="experience" placeholder="Share relevant experience..."></textarea></div>
+          <div class="field full"><label for="resume">Resume / CV</label><div class="upload"><input id="resume" type="file" accept=".pdf,.docx"></div></div>
+          <div class="field full"><fieldset>
+            <legend class="legend">Which contact channels do you prefer?</legend>
+            <div class="choices"><label><input type="checkbox" value="Email"> Email</label><label><input type="checkbox" value="SMS"> SMS</label></div>
+          </fieldset></div>
+        </div>
+        <label class="consent"><input id="consent" type="checkbox"> I confirm the information above is accurate.</label>
+      </section>
+      <aside>
+        <div class="aside-card">
+          <h3>One-Click Autofill</h3>
+          <div id="status" class="status">Ready when you are. Your details stay in this browser.</div>
+          <div class="local-row"><span class="dot"></span><span>Profile matching runs locally. No AI API calls.</span></div>
+          <div class="local-row"><span class="dot"></span><span>Review every answer. Nothing is submitted for you.</span></div>
+          <div class="privacy-note">Public demo: name, email and country only. Phone, address and salary are excluded.</div>
+        </div>
+        <div class="aside-card">
+          <h3>Résumé evidence</h3>
+          <span class="tag">Multi-agent AI</span><span class="tag">RAG</span><span class="tag">Python</span>
+          <div class="sub" style="margin-top:11px">Answers are grounded in the saved demo résumé.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <section class="memory">
+    <div class="card">
+      <div class="memory-head"><h2>Answer memory demo</h2><span class="step">SAVED IN THIS BROWSER ONLY</span></div>
+      <div class="sub" style="margin-bottom:13px">Enter one answer below; the similar question learns it locally on the next fill.</div>
+      <div class="memory-grid">
+        <div class="field"><label for="cert1">Which certification do you currently hold?</label><input id="cert1" type="text" placeholder="Enter a demo answer"></div>
+        <div class="field"><label for="cert2">Which certification do you hold currently?</label><input id="cert2" type="text" placeholder="This similar question can reuse it"></div>
+      </div>
+    </div>
+  </section>
+  <div id="caption"></div>
+  <script>
+    window.__demoFill = () => new Promise((resolve) => {
+      const listener = window.__listeners && window.__listeners[0];
+      if (!listener) return resolve({error:"Extension demo not loaded"});
+      listener({type:"jaf-fill",keep:false},null,(result) => {
+        const count = (result.rule || 0) + (result.memory || 0) + (result.local || 0);
+        document.getElementById("status").innerHTML =
+          `<strong>${count} fields filled.</strong> Review your answers before continuing.`;
+        resolve(result);
+      });
+    });
+  </script>
+</body>
+</html>

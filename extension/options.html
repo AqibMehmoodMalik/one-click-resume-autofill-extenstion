@@ -1,0 +1,34 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Autofill settings</title>
+<style>
+  body{font:14px system-ui,sans-serif;max-width:760px;margin:24px auto;padding:0 16px}
+  h2{margin-top:28px} input[type=text],input[type=password],textarea{width:100%;box-sizing:border-box;padding:8px;font:13px ui-monospace,monospace}
+  textarea{height:420px} button{padding:8px 14px;margin:8px 8px 0 0;cursor:pointer} #msg{margin-top:10px;white-space:pre-line}
+  @media (prefers-color-scheme:dark){body{background:#111827;color:#f3f4f6} input,textarea{background:#1f2937;color:#f3f4f6;border:1px solid #4b5563}}
+</style>
+<h1>One-Click Job Autofill</h1>
+
+<h2>1. Local résumé parser</h2>
+<p>
+  The parser only needs to be running when you choose to extract details from a new résumé.
+  Once saved, your profile and original résumé stay in this browser, and one-click autofill does not need a terminal or parser.
+  No résumé or form data is sent to an AI provider.
+</p>
+
+<h2>2. Your résumé</h2>
+<input type="file" id="cv">
+<p id="savedCv">Checking saved résumé...</p>
+<p>The original file (up to 10 MB) can be saved and uploaded as-is in any format. Local text extraction supports PDF, DOCX, ODT, HTML, TXT and MD.</p>
+<button id="parse">Extract résumé text locally</button>
+
+<h2>3. Review your profile</h2>
+<p>
+  The profile starts with neutral, blank personal details and can be populated from your CV. Add only details you want to use, and review them before saving.
+  Answers you enter manually on application forms are learned and saved locally against their question, so a matching or closely related question can be filled next time.
+  You can review or remove learned answers in the <code>answers</code> object below. Unprovided sensitive answers, such as citizenship, stay blank for you to answer.
+</p>
+<textarea id="profile" spellcheck="false"></textarea>
+<button id="save">Save everything</button>
+<div id="msg"></div>
+<script src="options.js"></script>
